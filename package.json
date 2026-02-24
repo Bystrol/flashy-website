@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lhci:mobile": "lhci autorun --config=.lighthouserc.mobile.json",
+    "lhci:desktop": "lhci autorun --config=.lighthouserc.desktop.json"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
