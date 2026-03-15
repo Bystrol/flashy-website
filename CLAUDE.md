@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Astro 5 + React 19 + Tailwind v4 website.
+Astro 6 + React 19 + Tailwind v4 website.
 
 ## Rules
 
