@@ -1,0 +1,101 @@
+---
+import arrowRight from "@assets/arrow-right.svg";
+import Navbar from "@components/Navbar.astro";
+import UnicornSceneEmbed from "@components/UnicornScene.tsx";
+
+const unicornProjectId = import.meta.env.PUBLIC_UNICORN_PROJECT_ID;
+---
+
+<section class="bg-black-black relative min-h-screen overflow-hidden">
+  <!-- Background gradients -->
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div class="hero-gradient-primary"></div>
+    <div class="hero-gradient-secondary"></div>
+  </div>
+
+  <!-- Left side blur for text readability -->
+  <div
+    class="bg-black-black/0 pointer-events-none absolute top-0 left-0 h-full w-[57%] blur-[25px]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <!-- Unicorn Studio scene (right side thunder) -->
+  <div class="absolute top-[10%] right-0 h-full w-full">
+    <UnicornSceneEmbed client:load projectId={unicornProjectId} />
+  </div>
+
+  <!-- Navigation -->
+  <Navbar />
+
+  <!-- Hero content -->
+  <div class="relative z-10 flex flex-col items-start gap-8 px-20 pt-40">
+    <span
+      class="border-light-purple-light-purple-40 bg-white-white-10 inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 backdrop-blur-sm"
+    >
+      <span class="bg-light-purple-light-purple size-2 rounded-full"></span>
+      <span
+        class="text-tagline font-weight-tagline text-light-purple-light-purple leading-[--text-tagline--line-height] uppercase"
+      >
+        Start Project
+      </span>
+    </span>
+
+    <h1
+      class="text-h2 font-weight-h2 text-white-white m-0 leading-[--text-h2--line-height] tracking-[--text-h2--letter-spacing]"
+    >
+      Websites that load
+      <br />
+      at lightning speed
+    </h1>
+
+    <p
+      class="text-h5 font-weight-h5 text-white-white-80 m-0 max-w-[407px] leading-[--text-h5--line-height]"
+    >
+      Built with Astro. Optimized to the core. Performance that converts.
+    </p>
+
+    <a href="#contact" class="flex items-center gap-3 no-underline">
+      <span
+        class="text-body-big text-white-white leading-[--text-body-big--line-height]"
+      >
+        Contact Now
+      </span>
+      <span
+        class="bg-orange flex items-center justify-center rounded-full p-2.5"
+      >
+        <img src={arrowRight.src} alt="" class="size-6" />
+      </span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .hero-gradient-primary {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 60% 70% at 6% 66%,
+      rgba(190, 115, 255, 1) 0%,
+      rgba(245, 123, 69, 0.8) 8%,
+      rgba(193, 73, 156, 0.7) 18%,
+      rgba(141, 24, 243, 0.6) 29%,
+      rgba(106, 18, 183, 0.4) 47%,
+      rgba(70, 12, 122, 0.2) 64%,
+      rgba(35, 6, 61, 0.1) 82%,
+      transparent 100%
+    );
+  }
+
+  .hero-gradient-secondary {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 50% 60% at 25% 62%,
+      rgba(71, 0, 132, 0.8) 0%,
+      rgba(53, 0, 99, 0.5) 25%,
+      rgba(35, 0, 66, 0.3) 50%,
+      transparent 100%
+    );
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+import logoSvg from "@assets/logo.svg";
+import arrowRight from "@assets/arrow-right.svg";
+---
+
+<nav class="relative z-10 flex items-center justify-between rounded-full border border-white-white-10 bg-white-white-5 px-8 py-3 mx-20 mt-7 backdrop-blur-md">
+  <a href="/" class="flex items-center gap-1">
+    <img src={logoSvg.src} alt="" class="h-[34px] w-[20px]" />
+    <span class="font-['Orbitron'] font-bold text-2xl text-white-white">
+      Flashy
+    </span>
+  </a>
+
+  <ul class="flex gap-9 text-body-big leading-[--text-body-big--line-height] text-white-white list-none m-0 p-0">
+    <li><a href="#services" class="text-white-white no-underline">Services</a></li>
+    <li><a href="#features" class="text-white-white no-underline">Features</a></li>
+    <li><a href="#about" class="text-white-white no-underline">About</a></li>
+  </ul>
+
+  <a href="#contact" class="flex items-center gap-3 no-underline">
+    <span class="text-body-big leading-[--text-body-big--line-height] text-white-white">
+      Contact Now
+    </span>
+    <span class="flex items-center justify-center rounded-full bg-orange p-2.5">
+      <img src={arrowRight.src} alt="" class="size-6" />
+    </span>
+  </a>
+</nav>
