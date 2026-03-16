@@ -1,0 +1,175 @@
+---
+import arrowRight from "@assets/arrow-right.svg";
+
+const stats = [
+  { count: 65, suffix: "%", label: "Our confidence builds." },
+  { count: 82, suffix: "%", label: "Our confidence builds." },
+  { count: 100, suffix: "%", label: "Our confidence builds." },
+  { count: 12, suffix: "%", label: "Our confidence builds." },
+];
+---
+
+<section class="relative overflow-hidden bg-white px-[100px] py-[100px]">
+
+
+  <!-- Values sub-section -->
+  <div class="relative z-10 flex flex-col gap-20">
+    <!-- Heading row: left copy + right large quote -->
+    <div class="flex items-start justify-between">
+      <!-- Left: badge, description, CTA -->
+      <div class="flex flex-col gap-6">
+        <span class="badge">Values</span>
+        <p
+          class="text-body-big font-weight-body-big text-black-black-80 m-0 w-[352px] leading-[--text-body-big--line-height]"
+        >
+          Our confidence builds trust. We make clients feel supported and
+          informed by giving rational, experience-based advice and articulating
+          trade-offs honestly.
+        </p>
+        <a href="#" class="flex items-center gap-3 no-underline">
+          <span
+            class="text-body-semibold font-weight-body-semibold text-black-black leading-[--text-body-semibold--line-height]"
+          >
+            Read More
+          </span>
+          <span
+            class="bg-orange flex items-center justify-center rounded-full p-[6.5px]"
+          >
+            <img src={arrowRight.src} alt="" class="size-[17px]" />
+          </span>
+        </a>
+      </div>
+
+      <!-- Right: two-tone heading -->
+      <p
+        class="text-h3 font-weight-h3 m-0 w-[759px] leading-[--text-h3--line-height] tracking-[--text-h3--letter-spacing]"
+      >
+        <span class="text-black-black"
+          >Our confidence builds trust. We make clients feel supported and
+          informed by giving rational,
+        </span><span class="values-faded-text"
+          >experience-based advice and articulating trade-offs honestly.</span
+        >
+      </p>
+    </div>
+
+    <!-- Stats row -->
+    <div class="flex items-start justify-between">
+      {
+        stats.map((stat) => (
+          <div class="flex w-[178px] flex-col">
+            <p
+              class="text-h1 font-weight-h1 text-black-black m-0 leading-[--text-h1--line-height] tracking-[--text-h1--letter-spacing] stat-number"
+              data-count={stat.count}
+              data-suffix={stat.suffix}
+            >
+              0{stat.suffix}
+            </p>
+            <p class="text-body-big font-weight-body-big text-black-black m-0 leading-[--text-body-big--line-height]">
+              {stat.label}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+</section>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 250px;
+    border: 1px solid rgba(175, 84, 255, 0.4);
+    background: linear-gradient(
+      102.94deg,
+      rgba(255, 101, 0, 0.2) 10.842%,
+      rgba(175, 84, 255, 0.2) 89.158%
+    );
+    backdrop-filter: blur(3.3px);
+    color: var(--color-dark-purple);
+    font-size: var(--text-tagline);
+    font-weight: var(--font-weight-tagline);
+    line-height: var(--text-tagline--line-height);
+    text-transform: uppercase;
+    white-space: nowrap;
+    width: fit-content;
+  }
+
+
+  .values-faded-text .char {
+    color: rgba(0, 0, 0, 0.5);
+    transition: color 0.1s ease;
+  }
+</style>
+
+<script>
+  const container = document.querySelector<HTMLElement>(".values-faded-text");
+  if (container) {
+    // Split into individual character spans, preserving spaces as-is
+    const chars = container.textContent!.split("");
+    container.innerHTML = chars
+      .map((c) => (c === " " ? " " : `<span class="char">${c}</span>`))
+      .join("");
+
+    const spans = Array.from(container.querySelectorAll<HTMLElement>(".char"));
+
+    const update = () => {
+      const rect = container.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // progress 0→1: starts when element enters viewport bottom, ends when element top hits 30% from top
+      const progress = Math.max(
+        0,
+        Math.min(1, (vh - rect.top) / (rect.height + vh * 0.6))
+      );
+
+      spans.forEach((span, i) => {
+        const charProgress = Math.max(
+          0,
+          Math.min(1, progress * spans.length - i * 0.6)
+        );
+        span.style.color = `rgba(0,0,0,${0.5 + charProgress * 0.5})`;
+      });
+    };
+
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  }
+
+  // Stat counter animation
+  const statEls = document.querySelectorAll<HTMLElement>(".stat-number");
+  const DURATION = 1800;
+
+  const animateCounter = (el: HTMLElement) => {
+    const target = Number(el.dataset.count);
+    const suffix = el.dataset.suffix ?? "";
+    const start = performance.now();
+
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / DURATION, 1);
+      // ease out cubic
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = `${Math.round(eased * target)}${suffix}`;
+      if (t < 1) requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 },
+  );
+
+  statEls.forEach((el) => observer.observe(el));
+</script>
