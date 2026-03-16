@@ -1,0 +1,666 @@
+---
+import lightningBolt from "@assets/lightning-bolt.svg";
+import arrowArchDev from "@assets/tech/arrow-arch-dev.svg";
+import arrowDevBiz from "@assets/tech/arrow-dev-biz.svg";
+import arrowDiscoveryArch from "@assets/tech/arrow-discovery-arch.svg";
+import arrowheadArchDev from "@assets/tech/arrowhead-arch-dev.svg";
+import arrowheadDiscoveryArch from "@assets/tech/arrowhead-discovery-arch.svg";
+import astroLogo from "@assets/tech/astro.png";
+import perfRing from "@assets/tech/perf-ring.svg";
+import reactLogo from "@assets/tech/react.png";
+import svelteLogo from "@assets/tech/svelte.png";
+import vueLogo from "@assets/tech/vue.png";
+import wordpressLogo from "@assets/tech/wordpress.png";
+---
+
+<section
+  class="bg-black-black flex flex-col items-center gap-[65px] px-20 py-[65px]"
+>
+  <!-- Section header -->
+  <div class="flex flex-col items-center gap-8 text-center">
+    <span class="features-badge">Features</span>
+    <h2
+      class="text-h3 font-weight-h3 text-white-white m-0 max-w-[726px] leading-[--text-h3--line-height] tracking-[--text-h3--letter-spacing]"
+    >
+      Unique professional approach
+    </h2>
+    <p
+      class="text-body-big font-weight-body-big text-white-white-80 m-0 max-w-[400px] leading-[--text-body-big--line-height]"
+    >
+      Built with Astro. Optimized to the core. Performance that converts.
+    </p>
+  </div>
+
+  <!-- Bento grid -->
+  <div class="bento-grid">
+    <!-- Card 1: Islands Architecture (681×290) -->
+    <div class="feature-card feature-card--gradient-br card-islands">
+      <div class="flex max-w-[317px] flex-col gap-3">
+        <div class="card-tag">
+          <img src={lightningBolt.src} alt="" class="card-tag-icon" />
+          <span>Interactivity without the overhead</span>
+        </div>
+        <h3
+          class="text-h4 font-weight-h4 text-white-white m-0 w-[294px] leading-[--text-h4--line-height]"
+        >
+          Islands Architecture in practice
+        </h3>
+        <p
+          class="text-small-body font-weight-small-body text-white-white-80 m-0 w-[317px] leading-[--text-small-body--line-height] tracking-[--text-small-body--letter-spacing]"
+        >
+          With Astro's islands architecture, most of the page stays static,
+          while interactive components remain lightweight, fast, and easy to
+          maintain.
+        </p>
+      </div>
+
+      <!-- Code snippet window (absolute, left=428px from card) -->
+      <div class="code-window">
+        <div class="code-window__body">
+          <span class="code-dim">---</span>
+          <span>
+            <span class="code-white">import </span><span class="code-purple"
+              >BuyButton</span
+            ><span class="code-dim"> from '../comp</span><span
+              class="code-white">onents/BuyButton.jsx';</span
+            >
+          </span>
+          <span>
+            <span class="code-white">import </span><span class="code-dim"
+              >&#123; getProductDetai</span
+            ><span class="code-white">ls &#125; from "ecommerce-package";</span>
+          </span>
+          <span>
+            <span class="code-white">import </span><span class="code-dim"
+              >ProductPageLayout from
+            </span><span class="code-white"
+              >'../layouts/ProductPageLayout.astro';</span
+            >
+          </span>
+          <span>
+            <span class="code-white">const </span><span class="code-purple"
+              >product</span
+            ><span class="code-dim"> = await get</span><span class="code-white"
+              >ProductDetails(Astro.params.slug);</span
+            >
+          </span>
+          <span class="code-dim">---</span>
+          <span class="code-purple">&lt;ProductPageLayout&gt;</span>
+          <span>
+            <span class="code-white"> &lt;img src=</span><span class="code-dim"
+              >&#123;product.imageUrl&#125;</span
+            ><span class="code-white">
+              alt=&#123;product.imageAlt&#125; /&gt;</span
+            >
+          </span>
+          <span>
+            <span class="code-white"> &lt;h2&gt;</span><span class="code-dim"
+              >&#123;product.name&#125;&lt;/h2&gt;</span
+            >
+          </span>
+          <span>
+            <span class="code-white"> &lt;BuyButton </span><span
+              class="code-dim">id=&#123;product.id&#125; cli</span
+            ><span class="code-white">ent:load /&gt;</span>
+          </span>
+          <span class="code-white">&lt;/ProductPageLayout&gt;</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Performance by design (544×290) -->
+    <div class="feature-card feature-card--gradient-br card-performance">
+      <div class="flex max-w-[262px] flex-col gap-3">
+        <div class="card-tag">
+          <img src={lightningBolt.src} alt="" class="card-tag-icon" />
+          <span>Fast from the first render</span>
+        </div>
+        <h3
+          class="text-h4 font-weight-h4 text-white-white m-0 w-[194px] leading-[--text-h4--line-height]"
+        >
+          Performance by design
+        </h3>
+        <p
+          class="text-small-body font-weight-small-body text-white-white-80 m-0 leading-[--text-small-body--line-height] tracking-[--text-small-body--letter-spacing]"
+        >
+          Astro lets us optimize performance at the architectural level, less
+          JavaScript and strong Core Web Vitals scores.
+        </p>
+      </div>
+
+      <!--
+        Decoration: gradient arc (vector19) + circle
+        Figma: wrapper at left=256, top=-8, size=281×302
+        Circle inside at left=77, top=85, size=169×169
+      -->
+      <div class="perf-decoration">
+        <img src={perfRing.src} alt="" class="perf-ring" />
+        <div class="perf-circle">
+          <span class="perf-circle__text">100%</span>
+          <div class="perf-circle__inset-glow"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Astro as the backbone (475×302) -->
+    <div class="feature-card feature-card--gradient-bl card-backbone">
+      <div class="flex flex-col gap-3">
+        <div class="card-tag">
+          <img src={lightningBolt.src} alt="" class="card-tag-icon" />
+          <span>The right tool for the job</span>
+        </div>
+        <h3
+          class="text-h4 font-weight-h4 text-white-white m-0 leading-[--text-h4--line-height]"
+        >
+          Astro as the backbone
+        </h3>
+        <p
+          class="text-small-body font-weight-small-body text-white-white-80 m-0 max-w-[349px] leading-[--text-small-body--line-height] tracking-[--text-small-body--letter-spacing]"
+        >
+          We combine Astro with React, Vue, headless CMSs, and APIs to match
+          each project's real needs.
+        </p>
+      </div>
+
+      <!--
+        Tech logos row — positioned at left=-2px, top=173px
+        All tiles: 84×84, rounded-[8.727px], border purple/60
+      -->
+      <div class="tech-logos">
+        <!-- WordPress: image fills tile with mix-blend-soft-light + dark overlay -->
+        <div class="tech-tile">
+          <div class="tech-tile__img-wrap tech-tile__img-wrap--fill">
+            <img
+              src={wordpressLogo.src}
+              alt="WordPress"
+              class="tech-tile__img"
+              style="mix-blend-mode: soft-light; object-fit: cover; width: 100%; height: 100%;"
+            />
+            <div class="tech-tile__overlay"></div>
+          </div>
+        </div>
+
+        <!-- React: 64×64 centered with mix-blend-soft-light -->
+        <div class="tech-tile">
+          <div
+            class="tech-tile__img-wrap"
+            style="left:9.28px; top:9.28px; width:64.3px; height:64.3px;"
+          >
+            <img
+              src={reactLogo.src}
+              alt="React"
+              class="tech-tile__img"
+              style="mix-blend-mode: soft-light; object-fit: cover;"
+            />
+          </div>
+        </div>
+
+        <!-- Astro: gradient background, image cropped to show only the "A" mark -->
+        <div class="tech-tile tech-tile--astro">
+          <div
+            class="tech-tile__img-wrap"
+            style="left:9.09px; top:-4.36px; width:65.63px; height:92.12px; overflow:hidden;"
+          >
+            <img
+              src={astroLogo.src}
+              alt="Astro"
+              style="position:absolute; top:0; left:-20.18%; width:403.51%; height:100%; max-width:none; object-fit:cover;"
+            />
+          </div>
+        </div>
+
+        <!-- Vue: 56×56 with padding, mix-blend-soft-light -->
+        <div class="tech-tile">
+          <div
+            class="tech-tile__img-wrap"
+            style="left:13.22px; top:14.53px; width:56.44px; height:56.44px;"
+          >
+            <img
+              src={vueLogo.src}
+              alt="Vue"
+              class="tech-tile__img"
+              style="mix-blend-mode: soft-light; object-fit: cover;"
+            />
+          </div>
+        </div>
+
+        <!-- Svelte/last: 56×35 with padding, mix-blend-soft-light -->
+        <div class="tech-tile">
+          <div
+            class="tech-tile__img-wrap"
+            style="left:15.85px; top:22.41px; width:56.61px; height:35.33px;"
+          >
+            <img
+              src={svelteLogo.src}
+              alt="Svelte"
+              class="tech-tile__img"
+              style="mix-blend-mode: soft-light; object-fit: cover;"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: A mature process (749×302) -->
+    <div class="feature-card feature-card--gradient-br card-process">
+      <div class="flex max-w-[282px] flex-col gap-3">
+        <div class="card-tag">
+          <img src={lightningBolt.src} alt="" class="card-tag-icon" />
+          <span>Engineering that serves business goals</span>
+        </div>
+        <h3
+          class="text-h4 font-weight-h4 text-white-white m-0 leading-[--text-h4--line-height]"
+        >
+          A mature process from idea to launch
+        </h3>
+        <p
+          class="text-small-body font-weight-small-body text-white-white-80 m-0 max-w-[272px] leading-[--text-small-body--line-height] tracking-[--text-small-body--letter-spacing]"
+        >
+          We follow a clear, proven workflow — from discovery and architecture
+          through development and deployment.
+        </p>
+      </div>
+
+      <!--
+        Process flow — absolute at left=365, top=41, 319×225
+        Pill positions from Figma:
+          discovery:      top=0,      left=0
+          architecture:   top=46.94,  left=147
+          development:    top=126.29, left=0
+          business value: top=187.76, left=154.41
+        Arrows (all positions relative to process-flow container):
+          vector20 (disc→arch):     left=124.44, top=19.56,  w=96.67,  h=26.26
+          vector23 arrowhead:       left=189.82, top=19.56,  w=30.73,  h=26.26
+          vector21 (arch→dev):      left=77.85,  top=67.62,  w=69.29,  h=59.79
+          vector24 arrowhead:       left=77.85,  top=67.62,  w=27.38,  h=25.71
+          vector22 (dev→biz):       left=154.4,  top=144,    w=83,     h=44
+      -->
+      <div class="process-flow" aria-hidden="true">
+        <!-- Arrow: discovery → architecture -->
+        <img
+          src={arrowDiscoveryArch.src}
+          alt=""
+          class="process-arrow"
+          style="left:124.44px; top:19.56px; width:96.67px; height:26.26px; mix-blend-mode: soft-light;"
+        />
+        <img
+          src={arrowheadDiscoveryArch.src}
+          alt=""
+          class="process-arrow"
+          style="left:189.82px; top:19.56px; width:30.73px; height:26.26px;"
+        />
+
+        <!-- Arrow: architecture → development -->
+        <img
+          src={arrowArchDev.src}
+          alt=""
+          class="process-arrow"
+          style="left:77.85px; top:67.62px; width:69.29px; height:59.79px; mix-blend-mode: soft-light;"
+        />
+        <img
+          src={arrowheadArchDev.src}
+          alt=""
+          class="process-arrow"
+          style="left:77.85px; top:67.62px; width:27.38px; height:25.71px;"
+        />
+
+        <!-- Arrow: development → business value -->
+        <img
+          src={arrowDevBiz.src}
+          alt=""
+          class="process-arrow"
+          style="left:154.4px; top:144px; width:83px; height:44px; mix-blend-mode: soft-light;"
+        />
+
+        <!-- Pills -->
+        <div class="process-pill process-pill--active" style="top:0; left:0;">
+          discovery
+        </div>
+        <div
+          class="process-pill process-pill--active"
+          style="top:46.94px; left:147px;"
+        >
+          architecture
+        </div>
+        <div
+          class="process-pill process-pill--dim"
+          style="top:126.29px; left:0;"
+        >
+          development
+        </div>
+        <div
+          class="process-pill process-pill--dim"
+          style="top:187.76px; left:154.41px;"
+        >
+          business value
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .features-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 250px;
+    border: 1px solid var(--color-light-purple-light-purple-40);
+    background: linear-gradient(
+      102.94deg,
+      rgba(255, 101, 0, 0.2) 10.842%,
+      rgba(175, 84, 255, 0.2) 89.158%
+    );
+    backdrop-filter: blur(3.3px);
+    color: var(--color-light-purple-light-purple);
+    font-size: var(--text-tagline);
+    font-weight: var(--font-weight-tagline);
+    line-height: var(--text-tagline--line-height);
+    text-transform: uppercase;
+    white-space: nowrap;
+    width: fit-content;
+  }
+
+  /* ── Bento grid ────────────────────────────────────────────── */
+  .bento-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    max-width: 1252px;
+  }
+
+  /* ── Feature card base ─────────────────────────────────────── */
+  .feature-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px;
+    border-radius: 12px;
+    border: 2px solid var(--color-grey-grey-30);
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    box-shadow: inset 0px -1px 19.6px 0px rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+  }
+
+  .card-islands {
+    width: 681px;
+    height: 290px;
+  }
+  .card-performance {
+    width: 544px;
+    height: 290px;
+  }
+  .card-backbone {
+    width: 475px;
+    height: 302px;
+  }
+  .card-process {
+    width: 749px;
+    height: 302px;
+  }
+
+  /* Card gradient accents */
+  .feature-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .feature-card--gradient-br::before {
+    background: radial-gradient(
+      ellipse at 91% 123%,
+      rgba(190, 115, 255, 1) 0%,
+      rgba(165, 69, 249, 1) 8%,
+      rgba(153, 46, 246, 1) 12%,
+      rgba(141, 24, 243, 1) 16%,
+      rgba(106, 18, 183, 0.75) 37%,
+      rgba(70, 12, 122, 0.5) 58%,
+      rgba(35, 6, 61, 0.25) 79%,
+      transparent 100%
+    );
+  }
+
+  .feature-card--gradient-bl::before {
+    background: radial-gradient(
+      ellipse at -19% 142%,
+      rgba(190, 115, 255, 1) 0%,
+      rgba(165, 69, 249, 1) 8%,
+      rgba(153, 46, 246, 1) 12%,
+      rgba(141, 24, 243, 1) 16%,
+      rgba(106, 18, 183, 0.75) 37%,
+      rgba(70, 12, 122, 0.5) 58%,
+      rgba(35, 6, 61, 0.25) 79%,
+      transparent 100%
+    );
+    opacity: 0.4;
+  }
+
+  /* ── Card tag line ─────────────────────────────────────────── */
+  .card-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-tag-icon {
+    width: 10px;
+    height: 18px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  .card-tag span {
+    font-size: var(--text-tagline);
+    font-weight: var(--font-weight-tagline);
+    line-height: var(--text-tagline--line-height);
+    letter-spacing: var(--text-caption--letter-spacing);
+    text-transform: uppercase;
+    color: var(--color-dark-purple);
+  }
+
+  /* ── Code snippet window (Card 1) ──────────────────────────── */
+  .code-window {
+    position: absolute;
+    top: 30px;
+    left: 428px;
+    width: 279px;
+    height: 273px;
+    background: var(--color-black-black-60);
+    border: 1.188px solid var(--color-dark-purple);
+    border-radius: 14.254px;
+    padding: 23.756px;
+    overflow: hidden;
+    box-shadow: -1.188px 0px 13.66px 1.188px rgba(0, 0, 0, 0.4);
+  }
+
+  .code-window__body {
+    display: flex;
+    flex-direction: column;
+    font-family: "Source Code Pro", monospace;
+    font-size: 10px;
+    line-height: 1.62;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+    overflow: hidden;
+    color: white;
+  }
+
+  .code-white {
+    color: rgba(255, 255, 255, 1);
+  }
+  .code-dim {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  .code-purple {
+    color: var(--color-dark-purple);
+  }
+
+  /* ── Performance decoration (Card 2) ──────────────────────── */
+  /*
+    Figma wrapper: left=256, top=-8, w=281, h=302
+    Circle inside wrapper: left=77, top=85, size=169
+  */
+  .perf-decoration {
+    position: absolute;
+    left: 256px;
+    top: -8px;
+    width: 281px;
+    height: 302px;
+  }
+
+  .perf-ring {
+    position: absolute;
+    /* Figma: inset-[-4.62%_-5.12%] on the ring image */
+    top: -4.62%;
+    left: -5.12%;
+    width: 110.24%;
+    height: 109.24%;
+    mix-blend-mode: plus-lighter;
+    pointer-events: none;
+  }
+
+  .perf-circle {
+    position: absolute;
+    left: 77px;
+    top: 85px;
+    width: 169px;
+    height: 169px;
+    border-radius: 50%;
+    border: 11.818px solid var(--color-dark-purple);
+    background: var(--color-black-black-40);
+    backdrop-filter: blur(3.545px);
+    box-shadow: 0px 0px 15.955px 0px rgba(175, 84, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .perf-circle__text {
+    font-family: "DM Sans", sans-serif;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: white;
+    white-space: nowrap;
+  }
+
+  .perf-circle__inset-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: inset 0px 4.727px 4.727px 0px rgba(255, 255, 255, 0.25);
+  }
+
+  /* ── Tech logos (Card 3) ───────────────────────────────────── */
+  /*
+    Figma: absolute at left=-2, top=173, flex row gap=14.438
+  */
+  .tech-logos {
+    position: absolute;
+    left: -2px;
+    top: 173px;
+    display: flex;
+    gap: 14.438px;
+    align-items: center;
+  }
+
+  .tech-tile {
+    position: relative;
+    width: 84px;
+    height: 84px;
+    border-radius: 8.727px;
+    border: 1.216px solid var(--color-purple-purple-60);
+    background: var(--color-white-white-5);
+    box-shadow: 0px 1.455px 5.018px 0px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(1.673px);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* Astro tile uses gradient background */
+  .tech-tile--astro {
+    background: linear-gradient(
+      140.82deg,
+      rgb(141, 24, 243) 9.4%,
+      rgb(241, 96, 1) 77.5%
+    );
+    border-width: 0.364px;
+  }
+
+  .tech-tile__img-wrap {
+    position: absolute;
+  }
+
+  .tech-tile__img-wrap--fill {
+    top: -1.22px;
+    left: -1.22px;
+    width: 84px;
+    height: 84px;
+  }
+
+  .tech-tile__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    pointer-events: none;
+  }
+
+  .tech-tile__overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--color-black-black-20);
+  }
+
+  /* ── Process flow (Card 4) ─────────────────────────────────── */
+  /*
+    Figma: absolute at left=365, top=41, 319×225
+  */
+  .process-flow {
+    position: absolute;
+    left: 365px;
+    top: 41px;
+    width: 319px;
+    height: 225px;
+  }
+
+  .process-arrow {
+    position: absolute;
+    display: block;
+  }
+
+  .process-pill {
+    position: absolute;
+    padding: 9px 25px;
+    border-radius: 558.805px;
+    background: var(--color-black-black-60);
+    border: 1.118px solid var(--color-purple-purple-60);
+    backdrop-filter: blur(1.424px);
+    box-shadow: 0px 1.239px 4.273px 0px rgba(0, 0, 0, 0.25);
+    font-family: "DM Sans", sans-serif;
+    font-size: var(--text-body-big);
+    font-weight: var(--font-weight-body-big);
+    line-height: var(--text-body-big--line-height);
+    color: var(--color-white-white);
+    white-space: nowrap;
+  }
+
+  .process-pill--active {
+    border-color: var(--color-dark-purple);
+  }
+
+  .process-pill--dim {
+    color: var(--color-white-white-40);
+  }
+</style>
