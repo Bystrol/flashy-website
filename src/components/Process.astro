@@ -1,0 +1,51 @@
+---
+import ProcessCards from "@components/ProcessCards";
+---
+
+<section class="bg-white px-[100px] pb-[100px]">
+  <div class="flex flex-col items-center gap-[74px]">
+    <!-- Header -->
+    <div class="flex flex-col items-center gap-8 text-center">
+      <span class="badge">Process</span>
+      <h2
+        class="text-h3 font-weight-h3 text-black-black m-0 w-[726px] leading-[--text-h3--line-height] tracking-[--text-h3--letter-spacing]"
+      >
+        Unique professional approach
+      </h2>
+      <p
+        class="text-body-big font-weight-body-big text-black-black-80 m-0 w-[400px] leading-[--text-body-big--line-height]"
+      >
+        Built with Astro. Optimized to the core. Performance that converts.
+      </p>
+    </div>
+
+    <!-- Process cards (interactive React island) -->
+    <ProcessCards client:visible />
+  </div>
+</section>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 250px;
+    border: 1px solid rgba(175, 84, 255, 0.4);
+    background: linear-gradient(
+      102.94deg,
+      rgba(255, 101, 0, 0.2) 10.842%,
+      rgba(175, 84, 255, 0.2) 89.158%
+    );
+    backdrop-filter: blur(3.3px);
+    color: var(--color-dark-purple);
+    font-size: var(--text-tagline);
+    font-weight: var(--font-weight-tagline);
+    line-height: var(--text-tagline--line-height);
+    text-transform: uppercase;
+    white-space: nowrap;
+    width: fit-content;
+  }
+
+
+</style>
