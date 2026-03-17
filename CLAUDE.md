@@ -10,3 +10,4 @@ Always use `yarn` instead of `npm`. This includes installing dependencies, runni
 
 - [Astro component architecture](.ai/rules/astro-components.md)
 - [Design tokens](.ai/rules/design-tokens.md)
+- [Figma MCP implementation](.ai/rules/figma.md)

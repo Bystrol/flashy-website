@@ -1,0 +1,383 @@
+---
+import astroLogo from "@assets/tech/astro.png";
+import reactLogo from "@assets/tech/react.png";
+import angularLogo from "@assets/tech/angular.png";
+import vueLogo from "@assets/tech/vue.png";
+import nextjsLogo from "@assets/tech/nextjs.png";
+import CwvChart from "@components/CwvChart";
+import type { CwvDataPoint } from "@components/CwvChart";
+
+// Fetch CWV timeseries data at build time
+const CWV_API = "https://cdn.httparchive.org/v1/cwv";
+const TECHNOLOGIES = "Astro,WordPress,Gatsby,Next.js,Nuxt.js";
+
+let cwvData: CwvDataPoint[] = [];
+try {
+  const res = await fetch(`${CWV_API}?technology=${encodeURIComponent(TECHNOLOGIES)}&geo=ALL&rank=ALL`);
+  if (res.ok) {
+    const raw: { date: string; technology: string; vitals: { name: string; desktop: { tested: number; good_number: number } }[] }[] = await res.json();
+    cwvData = raw
+      .map((entry) => {
+        const overall = entry.vitals.find((v) => v.name === "overall");
+        if (!overall || !overall.desktop.tested) return null;
+        return {
+          date: entry.date,
+          technology: entry.technology,
+          pct: Math.round((overall.desktop.good_number / overall.desktop.tested) * 100),
+        };
+      })
+      .filter((d): d is CwvDataPoint => d !== null);
+
+    // Find the earliest Astro data point and filter all data to start from that date
+    const astroStart = cwvData
+      .filter((d) => d.technology === "Astro")
+      .reduce((min, d) => (d.date < min ? d.date : min), "9999-99-99");
+    cwvData = cwvData.filter((d) => d.date >= astroStart);
+  }
+} catch {
+  // Fallback: chart will render empty if API is unavailable during build
+}
+
+// Derive Y-axis range and X-axis years from actual data
+const allPcts = cwvData.map((d) => d.pct);
+const yMax = allPcts.length ? Math.ceil(Math.max(...allPcts) / 10) * 10 : 80;
+const yLabels = Array.from({ length: 9 }, (_, i) => Math.round(yMax - (i * yMax) / 8));
+
+const allDates = [...new Set(cwvData.map((d) => d.date))].sort();
+const xLabels = [...new Set(allDates.map((d) => d.slice(0, 4)))];
+
+const features = [
+  "Zero JavaScript by default",
+  "Islands Architecture",
+  "Partial Hydration",
+  "Static-first mindset",
+  "Minimal JS bundle size",
+  "Framework-agnostic UI",
+  "SEO-friendly out of the box",
+  "No vendor lock-in",
+  "Ideal for content-heavy sites",
+];
+
+type Support = "yes" | "no" | "partial";
+
+interface Framework {
+  name: string;
+  logo: ImageMetadata;
+  highlighted: boolean;
+  logoStyle?: Record<string, string>;
+  support: Support[];
+}
+
+const frameworks: Framework[] = [
+  {
+    name: "Astro",
+    logo: astroLogo,
+    highlighted: true,
+    logoStyle: { left: "14.4px", top: "7.76px", width: "55.8px", height: "78.3px", overflow: "hidden" },
+    support: ["yes", "yes", "yes", "yes", "yes", "yes", "yes", "yes", "yes"],
+  },
+  {
+    name: "React",
+    logo: reactLogo,
+    highlighted: false,
+    logoStyle: { left: "13.91px", top: "18.91px", width: "55.6px", height: "55.6px" },
+    support: ["no", "no", "no", "no", "no", "no", "no", "no", "no"],
+  },
+  {
+    name: "Angular",
+    logo: angularLogo,
+    highlighted: false,
+    logoStyle: { left: "17px", top: "20px", width: "53.5px", height: "53.5px" },
+    support: ["no", "no", "no", "no", "no", "no", "no", "no", "no"],
+  },
+  {
+    name: "Vue",
+    logo: vueLogo,
+    highlighted: false,
+    logoStyle: { left: "18.27px", top: "23.27px", width: "49px", height: "49px" },
+    support: ["no", "no", "no", "no", "no", "no", "no", "no", "no"],
+  },
+  {
+    name: "Next.js",
+    logo: nextjsLogo,
+    highlighted: false,
+    logoStyle: { left: "12.14px", top: "15.82px", width: "59px", height: "59px" },
+    support: ["no", "no", "no", "no", "no", "no", "partial", "partial", "partial"],
+  },
+];
+
+
+---
+
+<section
+  class="bg-black-black flex flex-col items-center gap-[78px] px-20 py-[65px]"
+>
+  <!-- Section header -->
+  <div class="flex flex-col items-center gap-8 text-center">
+    <span class="why-astro-badge">Why Astro?</span>
+    <h2
+      class="text-h3 font-weight-h3 text-white-white m-0 max-w-[726px] leading-[--text-h3--line-height] tracking-[--text-h3--letter-spacing]"
+    >
+      Why Astro Framework?
+    </h2>
+    <p
+      class="text-body-big font-weight-body-big text-white-white-80 m-0 max-w-[400px] leading-[--text-body-big--line-height]"
+    >
+      Built with Astro. Optimized to the core. Performance that converts.
+    </p>
+  </div>
+
+  <!-- Content area -->
+  <div class="flex w-full max-w-[1284px] items-stretch justify-between">
+    <!-- Comparison grid -->
+    <div class="comparison-grid">
+      <!-- Feature labels column -->
+      <div class="flex flex-col gap-[8.727px]">
+        {
+          features.map((feature) => (
+            <div class="feature-pill">
+              <span class="text-body font-weight-body text-white-white-80 leading-[--text-body--line-height] tracking-[--text-body--letter-spacing] whitespace-nowrap">
+                {feature}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Framework columns -->
+      {
+        frameworks.map((fw) => (
+          <div class:list={["framework-column", { "framework-column--last": !fw.highlighted }]}>
+            <div class:list={["framework-logo", { "framework-logo--highlighted": fw.highlighted, "framework-logo--dim": !fw.highlighted }]}>
+              <div class="framework-logo__img-wrap" style={fw.logoStyle}>
+                <img
+                  src={fw.logo.src}
+                  alt={fw.name}
+                  class:list={[
+                    "absolute inset-0 max-w-none pointer-events-none",
+                    fw.highlighted ? "h-full" : "size-full object-cover",
+                    !fw.highlighted && "opacity-30",
+                  ]}
+                  style={fw.highlighted ? "left: -20.18%; width: 403.51%; max-width: none; top: 0; position: absolute;" : undefined}
+                />
+              </div>
+            </div>
+            <div class:list={["dots-column", { "dots-column--highlighted": fw.highlighted }]}>
+              {fw.support.map((status) => (
+                <div class="dot-row">
+                  <span
+                    class:list={[
+                      "dot",
+                      status === "yes" && "dot--green",
+                      status === "no" && "dot--red",
+                      status === "partial" && "dot--grey",
+                    ]}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Chart card -->
+    <div class="chart-card">
+      <div class="flex flex-col items-center gap-2">
+        <p
+          class="text-body-big font-weight-body-big text-white-white-80 m-0 leading-[--text-body-big--line-height] text-center"
+        >
+          Origins with good scores over time
+        </p>
+        <p
+          class="text-small-body font-weight-small-body text-white-white-40 m-0 leading-[--text-small-body--line-height] text-center max-w-[360px]"
+        >
+          The percentage of origins passing all three Core Web Vitals (LCP, INP, CLS) with a good experience.
+        </p>
+      </div>
+
+      <div class="flex w-[407px] flex-col items-end">
+        <div class="flex w-[403px] items-center gap-3">
+          <!-- Y axis labels -->
+          <div
+            class="flex h-[446px] flex-col items-start justify-between text-body font-weight-body text-white-white-80 text-center leading-[--text-body--line-height] tracking-[--text-body--letter-spacing] whitespace-nowrap"
+          >
+            {yLabels.map((label) => <p class="m-0">{label}</p>)}
+          </div>
+          <!-- Interactive chart -->
+          <div class="h-[424px] w-[373px] shrink-0">
+            <CwvChart data={cwvData} client:visible />
+          </div>
+        </div>
+        <!-- X axis labels -->
+        <div
+          class="flex w-[370px] items-start justify-between text-body font-weight-body text-white-white-80 text-center leading-[--text-body--line-height] tracking-[--text-body--letter-spacing] whitespace-nowrap"
+        >
+          {xLabels.map((label) => <p class="m-0">{label}</p>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-astro-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 250px;
+    border: 1px solid var(--color-light-purple-light-purple-40);
+    background: linear-gradient(
+      102.94deg,
+      rgba(255, 101, 0, 0.2) 10.842%,
+      rgba(175, 84, 255, 0.2) 89.158%
+    );
+    backdrop-filter: blur(3.3px);
+    color: var(--color-light-purple-light-purple);
+    font-size: var(--text-tagline);
+    font-weight: var(--font-weight-tagline);
+    line-height: var(--text-tagline--line-height);
+    text-transform: uppercase;
+    white-space: nowrap;
+    width: fit-content;
+  }
+
+  /* ── Comparison grid ─────────────────────────────────────── */
+  .comparison-grid {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    width: 799px;
+  }
+
+  .feature-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8.727px 20px;
+    width: 254px;
+    height: 46px;
+    border-radius: 13.091px;
+    background: var(--color-white-white-5);
+    overflow: hidden;
+  }
+
+  /* ── Framework columns ───────────────────────────────────── */
+  .framework-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    width: 88px;
+    flex-shrink: 0;
+  }
+
+  .framework-column--last {
+    align-self: stretch;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .framework-logo {
+    position: relative;
+    width: 88px;
+    height: 96px;
+    border-radius: 13.091px;
+    overflow: hidden;
+    box-shadow: 0px 1.305px 4.501px 0px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(1.5px);
+    flex-shrink: 0;
+  }
+
+  .framework-logo--highlighted {
+    background: linear-gradient(
+      138.36deg,
+      rgb(141, 24, 243) 9.4%,
+      rgb(241, 96, 1) 77.55%
+    );
+    border: 0.326px solid var(--color-purple-purple-60);
+  }
+
+  .framework-logo--dim {
+    background: var(--color-white-white-5);
+    border: 2.182px solid var(--color-grey-grey-30);
+  }
+
+  .framework-logo__img-wrap {
+    position: absolute;
+  }
+
+  /* ── Dots column ─────────────────────────────────────────── */
+  .dots-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8.727px;
+    width: 88px;
+    padding: 12px 0;
+    border-radius: 13.091px;
+    border: 2.182px solid var(--color-grey-grey-30);
+    background: var(--color-white-white-5);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dots-column--highlighted {
+    border-color: var(--color-purple-purple-60);
+  }
+
+  .dots-column--highlighted::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      0deg,
+      rgba(141, 24, 243, 0.5) 0%,
+      rgba(141, 24, 243, 0.15) 50%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  .dot-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .dot--green {
+    background: var(--color-green);
+    box-shadow: 0 0 6px rgba(0, 255, 93, 0.4);
+  }
+
+  .dot--red {
+    background: var(--color-red);
+    box-shadow: 0 0 6px rgba(237, 27, 36, 0.3);
+  }
+
+  .dot--grey {
+    background: var(--color-grey-grey);
+  }
+
+  /* ── Chart card ──────────────────────────────────────────── */
+  .chart-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 485px;
+    padding: 20px 40px;
+    border-radius: 13.091px;
+    border: 2.182px solid var(--color-grey-grey-30);
+    background: var(--color-white-white-5);
+    overflow: hidden;
+  }
+</style>
