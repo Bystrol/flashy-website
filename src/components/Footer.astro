@@ -1,18 +1,20 @@
 ---
-import logoSvg from "@assets/logo.svg";
 import arrowRight from "@assets/arrow-right.svg";
+import logoSvg from "@assets/logo.svg";
 ---
 
-<footer class="bg-black-black px-[100px] pb-[100px]">
+<footer class="bg-black-black relative z-10 px-[100px]">
   <div class="footer-card">
     <!-- Top row -->
     <div class="flex items-start justify-between">
       <!-- Left: brand -->
-      <div class="flex w-[306px] shrink-0 flex-col justify-between self-stretch">
+      <div
+        class="flex w-[306px] shrink-0 flex-col justify-between self-stretch"
+      >
         <div class="flex flex-col gap-4">
           <a href="/" class="flex items-center gap-1 no-underline">
             <img src={logoSvg.src} alt="" class="h-[34px] w-[20px]" />
-            <span class="font-['Orbitron'] text-2xl font-bold text-white-white">
+            <span class="text-white-white font-['Orbitron'] text-2xl font-bold">
               Flashy
             </span>
           </a>
@@ -30,7 +32,7 @@ import arrowRight from "@assets/arrow-right.svg";
             Contact Us
           </span>
           <span
-            class="flex items-center justify-center rounded-full bg-orange p-[6.5px]"
+            class="bg-orange flex items-center justify-center rounded-full p-[6.5px]"
           >
             <img src={arrowRight.src} alt="" class="size-[17px]" />
           </span>
@@ -129,7 +131,7 @@ import arrowRight from "@assets/arrow-right.svg";
     </div>
 
     <!-- Divider -->
-    <div class="h-px w-full bg-white-white-10"></div>
+    <div class="bg-white-white-10 h-px w-full"></div>
 
     <!-- Bottom row -->
     <div class="flex items-center justify-between">

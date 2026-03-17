@@ -1,0 +1,44 @@
+---
+
+---
+
+<section class="flashy-section">
+  <p class="flashy-text">FLASHY</p>
+</section>
+
+<style>
+  .flashy-section {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        ellipse 800px 400px at 50% 100%,
+        rgba(141, 24, 243, 1) 0%,
+        rgba(141, 24, 243, 0) 100%
+      ),
+      var(--color-black-black);
+    display: flex;
+    justify-content: center;
+    margin-top: -100px;
+    padding-top: 100px;
+  }
+
+  .flashy-text {
+    font-family: "Orbitron", sans-serif;
+    font-weight: 700;
+    font-size: 250px;
+    line-height: normal;
+    white-space: nowrap;
+    margin: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.2) 38.5%,
+      rgba(0, 0, 0, 0) 86%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    transform: translateY(12%);
+  }
+</style>
