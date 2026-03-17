@@ -1,0 +1,117 @@
+---
+import arrowRight from "@assets/arrow-right.svg";
+import ContactForm from "@components/ContactForm";
+---
+
+<section class="bg-black-black px-[100px] py-[100px]">
+  <div class="flex items-start justify-between">
+    <!-- Left: form -->
+    <div class="w-[648px] shrink-0">
+      <ContactForm client:visible />
+    </div>
+
+    <!-- Right: info -->
+    <div class="flex w-[425px] shrink-0 flex-col justify-between self-stretch">
+      <div class="flex flex-col gap-8">
+        <span class="contact-badge">Contact Us</span>
+        <h2
+          class="text-h3 font-weight-h3 text-white-white m-0 leading-[--text-h3--line-height] tracking-[--text-h3--letter-spacing]"
+        >
+          Contact Us
+        </h2>
+        <p
+          class="text-body-big font-weight-body-big text-white-white-80 m-0 max-w-[382px] leading-[--text-body-big--line-height]"
+        >
+          Our confidence builds trust. We make clients feel supported and
+          informed by giving rational, experience-based advice and articulating
+          trade-offs honestly.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-5">
+        <a href="mailto:contact@flashy.com" class="flex items-center gap-3 no-underline">
+          <span
+            class="text-links font-weight-links text-white-white-80 leading-[--text-links--line-height]"
+          >
+            contact@flashy.com
+          </span>
+          <span class="contact-icon-circle">
+            <img src={arrowRight.src} alt="" class="size-[17px]" />
+          </span>
+        </a>
+        <a href="tel:+48985736245" class="flex items-center gap-3 no-underline">
+          <span
+            class="text-links font-weight-links text-white-white-80 leading-[--text-links--line-height]"
+          >
+            +48 985736245
+          </span>
+          <span class="contact-icon-circle">
+            <img src={arrowRight.src} alt="" class="size-[17px]" />
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 250px;
+    border: 1px solid var(--color-light-purple-light-purple-40);
+    background: linear-gradient(
+      102.94deg,
+      rgba(255, 101, 0, 0.2) 10.842%,
+      rgba(175, 84, 255, 0.2) 89.158%
+    );
+    backdrop-filter: blur(3.3px);
+    color: var(--color-light-purple-light-purple);
+    font-size: var(--text-tagline);
+    font-weight: var(--font-weight-tagline);
+    line-height: var(--text-tagline--line-height);
+    text-transform: uppercase;
+    white-space: nowrap;
+    width: fit-content;
+  }
+
+  .contact-icon-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6.5px;
+    border-radius: 50%;
+    border: 0.714px solid var(--color-white-white-40);
+    background: var(--color-grey-grey-60);
+    overflow: hidden;
+  }
+</style>
+
+<style is:global>
+  .contact-input {
+    width: 100%;
+    padding: 16px 30px;
+    border-radius: 12px;
+    border: 2px solid var(--color-grey-grey-30);
+    background: var(--color-white-white-5);
+    color: var(--color-white-white);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-body);
+    line-height: var(--text-body--line-height);
+    letter-spacing: var(--text-body--letter-spacing);
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .contact-input::placeholder {
+    color: var(--color-white-white-60);
+  }
+
+  .contact-input:focus {
+    border-color: var(--color-purple-purple-60);
+  }
+</style>
