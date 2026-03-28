@@ -1,5 +1,6 @@
 ---
 import arrowRight from "@assets/arrow-right.svg";
+import gradient from "@assets/gradient.png";
 
 const stats = [
   { count: 65, suffix: "%", label: "Our confidence builds." },
@@ -9,8 +10,15 @@ const stats = [
 ];
 ---
 
-<section class="relative overflow-hidden bg-white px-[100px] py-[100px]">
-
+<section
+  id="values"
+  class="relative overflow-hidden bg-white px-[100px] pt-[400px] pb-[100px]"
+>
+  <img
+    src={gradient.src}
+    alt=""
+    class="absolute top-0 left-1/2 w-full -translate-x-1/2 rotate-180"
+  />
 
   <!-- Values sub-section -->
   <div class="relative z-10 flex flex-col gap-20">
@@ -59,7 +67,7 @@ const stats = [
         stats.map((stat) => (
           <div class="flex w-[178px] flex-col">
             <p
-              class="text-h1 font-weight-h1 text-black-black m-0 leading-[--text-h1--line-height] tracking-[--text-h1--letter-spacing] stat-number"
+              class="text-h1 font-weight-h1 text-black-black stat-number m-0 leading-[--text-h1--line-height] tracking-[--text-h1--letter-spacing]"
               data-count={stat.count}
               data-suffix={stat.suffix}
             >
@@ -73,7 +81,6 @@ const stats = [
       }
     </div>
   </div>
-
 </section>
 
 <style>
@@ -98,7 +105,6 @@ const stats = [
     white-space: nowrap;
     width: fit-content;
   }
-
 
   .values-faded-text .char {
     color: rgba(0, 0, 0, 0.5);
@@ -168,7 +174,7 @@ const stats = [
         }
       });
     },
-    { threshold: 0.5 },
+    { threshold: 0.5 }
   );
 
   statEls.forEach((el) => observer.observe(el));

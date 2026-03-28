@@ -1,8 +1,12 @@
 ---
+import gradient from "@assets/gradient.png";
 import ProcessCards from "@components/ProcessCards";
 ---
 
-<section class="bg-white px-[100px] pb-[100px]">
+<section
+  id="process"
+  class="relative bg-white px-[100px] pt-[100px] pb-[500px]"
+>
   <div class="flex flex-col items-center gap-[74px]">
     <!-- Header -->
     <div class="flex flex-col items-center gap-8 text-center">
@@ -22,6 +26,12 @@ import ProcessCards from "@components/ProcessCards";
     <!-- Process cards (interactive React island) -->
     <ProcessCards client:visible />
   </div>
+
+  <img
+    src={gradient.src}
+    alt=""
+    class="absolute bottom-0 left-1/2 w-full -translate-x-1/2"
+  />
 </section>
 
 <style>
@@ -46,6 +56,4 @@ import ProcessCards from "@components/ProcessCards";
     white-space: nowrap;
     width: fit-content;
   }
-
-
 </style>

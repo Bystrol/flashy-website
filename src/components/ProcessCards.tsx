@@ -69,7 +69,7 @@ export default function ProcessCards() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="flex w-full items-stretch gap-[22px]">
+    <div ref={sectionRef} className="z-10 flex w-full items-stretch gap-[22px]">
       {steps.map((step, index) => {
         const isActive = index === activeIndex;
         return (

@@ -3,26 +3,73 @@ import logoSvg from "@assets/logo.svg";
 import arrowRight from "@assets/arrow-right.svg";
 ---
 
-<nav class="relative z-10 flex items-center justify-between rounded-full border border-white-white-10 bg-white-white-5 px-8 py-3 mx-20 mt-7 backdrop-blur-md">
+<nav
+  id="navbar"
+  class="border-white-white-10 bg-white-white-5 fixed top-7 right-0 left-0 z-50 mx-20 flex items-center justify-between rounded-full border px-8 py-3 backdrop-blur-md transition-transform duration-500"
+>
   <a href="/" class="flex items-center gap-1">
     <img src={logoSvg.src} alt="" class="h-[34px] w-[20px]" />
-    <span class="font-['Orbitron'] font-bold text-2xl text-white-white">
+    <span class="text-white-white font-['Orbitron'] text-2xl font-bold">
       Flashy
     </span>
   </a>
 
-  <ul class="flex gap-9 text-body-big leading-[--text-body-big--line-height] text-white-white list-none m-0 p-0">
-    <li><a href="#services" class="text-white-white no-underline">Services</a></li>
-    <li><a href="#features" class="text-white-white no-underline">Features</a></li>
-    <li><a href="#about" class="text-white-white no-underline">About</a></li>
+  <ul
+    class="text-body-big text-white-white m-0 flex list-none gap-9 p-0 leading-[--text-body-big--line-height]"
+  >
+    <li>
+      <a href="#services" class="text-white-white no-underline">Services</a>
+    </li>
+    <li>
+      <a href="#features" class="text-white-white no-underline">Features</a>
+    </li>
+    <li>
+      <a href="#values" class="text-white-white no-underline">Values</a>
+    </li>
+    <li>
+      <a href="#process" class="text-white-white no-underline">Process</a>
+    </li>
   </ul>
 
   <a href="#contact" class="flex items-center gap-3 no-underline">
-    <span class="text-body-big leading-[--text-body-big--line-height] text-white-white">
+    <span
+      class="text-body-big text-white-white leading-[--text-body-big--line-height]"
+    >
       Contact Now
     </span>
-    <span class="flex items-center justify-center rounded-full bg-orange p-2.5">
+    <span class="bg-orange flex items-center justify-center rounded-full p-2.5">
       <img src={arrowRight.src} alt="" class="size-6" />
     </span>
   </a>
 </nav>
+
+<script>
+  const navbar = document.getElementById("navbar")!;
+  let lastScrollY = window.scrollY;
+  let accumulatedDelta = 0;
+  const threshold = 50;
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY;
+
+      if (Math.sign(delta) !== Math.sign(accumulatedDelta)) {
+        accumulatedDelta = 0;
+      }
+      accumulatedDelta += delta;
+
+      if (accumulatedDelta > threshold && currentScrollY > 80) {
+        navbar.style.transform = "translateY(-150%)";
+        accumulatedDelta = 0;
+      } else if (accumulatedDelta < -threshold) {
+        navbar.style.transform = "translateY(0)";
+        accumulatedDelta = 0;
+      }
+
+      lastScrollY = currentScrollY;
+    },
+    { passive: true }
+  );
+</script>
